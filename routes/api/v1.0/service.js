@@ -36,5 +36,36 @@ router.post('/imc', function(req, res, next) {
     //res.render('index', { title: 'Express' });
 });
 
+router.post('/kcal', function(req, res, next) {
+    var information = [
+        "Albóndigas 100g 202 kcal 848 kj",
+        "Arroz frito 100g 186",
+        "Papa frita",
+        "Carne asada",
+        "Pollo frito",
+        "Pollo spiedo",
+        "Pollo broaster",
+        "Carne con tomate",
+        "Ensalada Cesar",
+        "Ensalada Rusa",
+        "Pizza Italiana",
+        "Taco",
+        "Pure de papas"
+    ];
+    var wordkey = req.body.wordkey;
+    var expreg = new RegExp(wordkey);
+    var result = information.filter((key) => {
+        if (key.search(expreg) > -1) {
+            return true;
+        }
+        return false;
+    });
+    res.send({
+        "wordkey": wordkey,
+        "result": result
+    });
+
+});
+
 
 module.exports = router;
